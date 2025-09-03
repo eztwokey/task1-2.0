@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WB Order Service</title>
+  <style>
+    body { font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial; padding: 20px; max-width: 900px; margin: auto; }
+    header { display:flex; align-items: center; gap: 12px; }
+    input { padding: 8px; width: 360px; }
+    button { padding: 8px 12px; cursor: pointer; }
+    pre { background: #111; color: #0f0; padding: 12px; overflow:auto; border-radius: 6px; }
+    .row { display:flex; gap: 8px; margin: 12px 0; align-items: center; }
+    .hint { color: #555; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>WB Order Service</h1>
+  </header>
+
+  <section>
+    <div class="row">
+      <input id="orderId" placeholder="Введите order_uid" />
+      <button onclick="fetchOrder()">Найти</button>
+      <button onclick="health()">/healthz</button>
+      <button onclick="ready()">/readyz</button>
+    </div>
+    <div class="hint">Подсказка: после генерации заказов (cmd/producer) сюда можно вставить один из выведенных UID.</div>
+    <pre id="out">{}</pre>
+  </section>
+
+<script>
+async function fetchOrder(){
+  const id = document.getElementById('orderId').value.trim();
+  if(!id){ out('Введите order_uid'); return }
+  const r = await fetch('/order/'+encodeURIComponent(id));
+  out(await r.text(), r.ok);
+}
+async function health(){ const r = await fetch('/healthz'); out(await r.text(), r.ok) }
+async function ready(){ const r = await fetch('/readyz'); out(await r.text(), r.ok) }
+function out(t, ok){ const pre = document.getElementById('out'); pre.textContent = t; pre.style.color = ok? '#0f0':'#f66' }
+</script>
+</body>
+</html>
