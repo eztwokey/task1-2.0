@@ -35,13 +35,6 @@ Cервис на Go 1.24, который читает заказы из Kafka, �
 ./docs               # документация/диаграммы
 ```
 
-## Конфигурация
-Скопируйте `.env.example` в `.env` и при необходимости поправьте значения.
-Ключевые переменные:
-- `POSTGRES_URL`, `PG_MAX_CONNS`
-- `KAFKA_BROKERS`, `KAFKA_ORDERS_TOPIC`, `KAFKA_GROUP_ID`
-- `CACHE_TTL`, `CACHE_JANITOR_INTERVAL`
-- `HTTP_PORT`, `LOG_LEVEL`
 
 ## Быстрый старт (Ubuntu / Windows + Docker Desktop)
 ```bash
