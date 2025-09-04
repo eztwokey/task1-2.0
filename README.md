@@ -37,12 +37,6 @@ Cервис на Go 1.24, который читает заказы из Kafka, �
 
 
 
-## Тесты
-```bash
-go test ./...
-```
-
-
 
 ---
 
@@ -59,6 +53,6 @@ docker compose -f deploy/docker-compose.yml up -d zookeeper kafka postgres migra
 curl -s http://localhost:8081/healthz
 curl -s http://localhost:8081/readyz
 
-#3) Генерация тестовых заказов (10 шт.) и запрос одного из них
+#3) Генерация тестовых заказов и запрос одного из них
 docker compose -f deploy/docker-compose.yml run --rm --entrypoint /producer app -n 10
-curl -s http://localhost:8081/order/<ВСТАВЬТЕ_UID> | jq
+curl -s http://localhost:8081/order/(айдишник заказа) | jq
