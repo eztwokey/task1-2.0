@@ -51,7 +51,6 @@ func (r *PGRepo) UpsertOrder(ctx context.Context, o *model.Order) error {
 	return err
 }
 
-// Optional: batch insert within tx for future extension
 func (r *PGRepo) upsertBatch(ctx context.Context, orders []*model.Order) error {
 	tx, err := r.pool.BeginTx(ctx, pgx.TxOptions{})
 	if err != nil { return err }
